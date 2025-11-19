@@ -176,3 +176,31 @@ INSERT INTO ecommerce_order_details (order_id, product_id, quantity, unit_price)
 VALUES (1, 1, 1, 1200),
        (1, 2, 2, 25),
        (2, 2, 4, 25);
+
+    -- TASK 1
+
+    CREATE TABLE employees (
+        emp_name TEXT,
+        salary INT,
+        dept_name TEXT,
+        location TEXT
+    );
+
+    -- TASK 2
+
+    CREATE TABLE departament (
+        dept_name INT,
+        num_employees INT,
+        avg_salary INT,
+        num_projects INT
+    );
+
+    -- Insert data into departament using LEFT JOIN and COUNT
+    INSERT INTO departament (dept_name, num_employees, avg_salary)
+    SELECT 
+        e.dept_name,
+        COUNT(e.emp_name) as num_employees,
+        AVG(e.salary) as avg_salary
+    FROM employees e
+    LEFT JOIN departament d ON e.dept_name = d.dept_name
+    GROUP BY e.dept_name;
